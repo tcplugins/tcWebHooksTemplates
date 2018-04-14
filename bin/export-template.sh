@@ -73,9 +73,8 @@ function logErrorAndExit {
 
 function extractIdAndNameFromTemplate {
     local TEMPLATE_FILE=$1
-    MY_EXTRACTED_ID=`grep -Po '^{"id":.*?[^\\]",' $TEMPLATE_FILE  | sed 's/^{\"id\":\"//'  | sed 's/\",$//'`
-    MY_EXTRACTED_DESCRIPTION=`grep -Po '"description":.*?[^\\]",' $TEMPLATE_FILE  | sed 's/\"description\":\"//'  | sed 's/\",$//'`
-    
+    MY_EXTRACTED_ID=`grep -Po '^{"id":.*?[^\\\]",' $TEMPLATE_FILE  | sed 's/^{\"id\":\"//'  | sed 's/\",$//'`
+    MY_EXTRACTED_DESCRIPTION=`grep -Po '"description":.*?[^\\\]",' $TEMPLATE_FILE  | sed 's/\"description\":\"//'  | sed 's/\",$//'`
 }
 
 function checkIdMatches {
@@ -106,6 +105,20 @@ function getTemplate {
 	checkIdMatches $MY_TEMPLATE_ID $MY_EXTRACTED_ID
 	cp $TEMP_TEMPLATE_FILE $MY_TEMPLATE_FILE
 	checkDownloadedFile $MY_TEMPLATE_FILE
+}
+
+function generateReadmeFile {
+	if [  -r ${MY_TEMPLATE_DIR}/${MY_TEMPLATE_ID}/readme.md ] ; then
+	    echo "INFO:   readme file ${MY_TEMPLATE_DIR}/${MY_TEMPLATE_ID}/readme.md  already exists."
+	    echo "INFO:   A new one will not be created."
+	else
+	    echo "INFO:   Generating readme.md file in ${MY_TEMPLATE_DIR}/${MY_TEMPLATE_ID}"
+		cat ${MY_RUN_DIR}/readme-skeleton.md | \
+		  sed "s/@description_token@/$MY_EXTRACTED_DESCRIPTION/" | \
+		  sed "s/@templateId_token@/$MY_EXTRACTED_ID/" \
+		  > ${MY_TEMPLATE_DIR}/${MY_TEMPLATE_ID}/readme.md
+	fi
+
 }
 
 function promptForUnsetOptions { 

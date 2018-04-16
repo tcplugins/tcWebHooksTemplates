@@ -50,7 +50,11 @@ INFO:   Template successfully updated with ID: stride_simple
 To create a new template, POST to `/app/rest/webhooks/templates`
 
 ```
-curl -X POST -H "Content-Type: application/json" -u "netwolfuk:xxxxxxxx" -d @tcWebHooksTemplates/webhook-templates/stride_simple/webhook-template.json http://teamcity:8111/app/rest/webhooks/templates
+curl -X POST \
+    -u "netwolfuk:xxxxxxxx" \
+    -H "Content-Type: application/json" \ 
+    -d @tcWebHooksTemplates/webhook-templates/stride_simple/webhook-template.json \
+    http://teamcity:8111/app/rest/webhooks/templates
 
 ```
 The response will contain the new template (in XML format unless you request json with `-H "Accept: application/json"`)
@@ -60,7 +64,11 @@ The response will contain the new template (in XML format unless you request jso
 To replace an existing template, PUT to `/app/rest/webhooks/templates/id:templateId`
 
 ```
-curl -X PUT -H "Content-Type: application/json" -u "netwolfuk:xxxxxxxx" -d @tcWebHooksTemplates/webhook-templates/stride_simple/webhook-template.json http://teamcity:8111/app/rest/webhooks/templates/id:stride_simple
+curl -X PUT \
+     -u "netwolfuk:xxxxxxxx" \
+     -H "Content-Type: application/json" \
+     -d @tcWebHooksTemplates/webhook-templates/stride_simple/webhook-template.json \
+     http://teamcity:8111/app/rest/webhooks/templates/id:stride_simple
 ```
 The response will contain the updated template (in XML format unless you request json with `-H "Accept: application/json"`)
 
@@ -94,3 +102,15 @@ INFO:   URL: http://teamcity:8111/app/rest/webhooks/templates/id:stride_simple
 INFO:   Success: The template has been downloaded into: ./tcWebHooksTemplates/bin/../webhook-templates/stride_simple
 INFO:   Generating readme.md file in ./tcWebHooksTemplates/bin/../webhook-templates/stride_simple
 ```
+
+#### Exporting a WebHook Template manually via the REST API
+
+The following is an example using cURL.
+
+```
+ curl -H "Accept: application/json" \
+     -u "netwolfuk:xxxxxxxx" \
+     -o webhook-template.json \
+     http://teamcity:8111/app/rest/webhooks/templates/id:stride_simple?fields=\$long,content
+```
+Don't forget to escape the `$` with a `\` otherwise the shell will try to interpret it.

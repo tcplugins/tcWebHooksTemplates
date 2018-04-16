@@ -1,9 +1,18 @@
 
 # tcWebHooksTemplates - A collection of WebHook Templates for the tcWebHooks TeamCity plugin
 
-This GitHub repository is a place to share and discover WebHook Templates.
+This GitHub repository is a place to share and discover WebHook Templates. This allows the following benefits:
+
+- The person/team with the access to the end system can develop and test a template and share it with the community
+- Templates to be easily shared via a pull request
+- It allows template updates to happen at a different cadence to the plugin releases
+- It allows the community to iterate quickly on template development together
+- Once we have a good stable template developed, it can become a candidate for inclusion in the tcWebHooks release
 
 Have a browse of the [webhook-templates](./webhook-templates/) area, and see if there are any templates you'd like to install.
+
+If there is a template missing, considering create it, and raising a pull request to add it.
+For more information on editing templates in the TeamCity UI, see the [WebHook-Templates-:-Web-UI](https://github.com/tcplugins/tcWebHooks/wiki/WebHook-Templates-%3A-Web-UI) section on the tcWebHooks wiki.
 
 ### Importing a WebHook Template from this repository
 

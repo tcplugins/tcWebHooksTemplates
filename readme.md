@@ -72,9 +72,17 @@ curl -X PUT \
 ```
 The response will contain the updated template (in XML format unless you request json with `-H "Accept: application/json"`)
 
-#### Modifying a template in TeamCity
+### Modifying a template in TeamCity
 
 Once a template is imported, it's possible to make changes to it from within TeamCity to further refine it. For information about editing WebHook Templates, please see the [WebHook-Templates-:-Web-UI](https://github.com/tcplugins/tcWebHooks/wiki/WebHook-Templates-%3A-Web-UI) section on the tcWebHooks wiki.
+
+It would be great to share any templates with the wider community. See below on how to export a template to share.
+
+### Exporting a WebHook Template from TeamCity
+
+This is the process of downloading a `webhook-template.json` from TeamCity.
+This is achieved using the tcWebHook REST API. If the tcWebHook REST API plugin is not installed in TeamCity, you will need to do that first. See the [tcWebHook Installation instructions](https://github.com/tcplugins/tcWebHooks/wiki/Installing).
+
 
 #### Exporting a WebHook Template using the export-template.sh script
 Note: The script does not need to be run on the same computer as the TeamCity server

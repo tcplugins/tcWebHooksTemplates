@@ -2,7 +2,7 @@
 
 Name | Detail
 ---- | ------
-Template Description | *Stride Simple Message*
+Template Description | *Atlassian Stride Simple Message*
 Template Id | *stride_simple*
 Contributor | netwolfuk (github), @netwolfuk (twitter)
 

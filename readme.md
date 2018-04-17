@@ -35,9 +35,9 @@ Requirements:
 
 The import script takes three arguments. If they are not present on the commndline, the script will prompt for them.
 
-A template's templateId, is shown near to top of the page when viewing a template in the webUI. Go to `/webhooks/templates.html` in TeamCity and click `view` on a template to see the template details.
+A template's templateId, is shown near the top of the page when viewing a template in the webUI. Go to `/webhooks/templates.html` in TeamCity and click `view` on a template to see the template details.
   
-- `-u username:password` : This a teamcity account with admin privileges. Username and password are colon seperated as per usual cURL syntax.
+- `-u username:password` : This a teamcity account with admin privileges. Username and password are colon separated as per usual cURL syntax.
 - `-s teamcity-server-url` : The server address for TeamCity. Please don't include the trailing slash.
 - `-t templateId` : The templateId of the template to upload. The script will look for it in a directory (folder) of the same name under `webhook-templates`. The script also checks that the ID inside the template JSON file matches the name of the directory (folder).
 
@@ -105,9 +105,9 @@ Requirements:
 
 The export script takes three arguments. If they are not present on the commndline, the script will prompt for them.
 
-A template's templateId, is shown near to top of the page when viewing a template in the webUI. Go to `/webhooks/templates.html` in TeamCity and click `view` on a template to see the template details.
+A template's templateId, is shown near the top of the page when viewing a template in the webUI. Go to `/webhooks/templates.html` in TeamCity and click `view` on a template to see the template details.
   
-- `-u username:password` : This a teamcity account with admin privileges. Username and password are colon seperated as per usual cURL syntax.
+- `-u username:password` : This a teamcity account with admin privileges. Username and password are colon separated as per usual cURL syntax.
 - `-s teamcity-server-url` : The server address for TeamCity. Please don't include the trailing slash.
 - `-t templateId` : The templateId of the template to download. The script will create a directory (folder) of the same name under `webhook-templates`. The script copies a `readme.md` into that directory in case you want to share the template.
 

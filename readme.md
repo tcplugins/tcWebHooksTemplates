@@ -59,27 +59,27 @@ INFO:   Template successfully updated with ID: stride_simple
 To create a new template, POST to `/app/rest/webhooks/templates`
 
 ```
-curl -X POST \
+curl -X POST -k \
     -u "netwolfuk:xxxxxxxx" \
     -H "Content-Type: application/json" \ 
     -d @tcWebHooksTemplates/webhook-templates/stride_simple/webhook-template.json \
     http://teamcity:8111/app/rest/webhooks/templates
 
 ```
-The response will contain the new template (in XML format unless you request json with `-H "Accept: application/json"`)
+The response will contain the new template (in XML format unless you request json with `-H "Accept: application/json"`) The `-k` disables SSL validation, in case curl does not trust the CA that signed the TeamCity SSL certificate (if relevant).
 
 **Updating an existing template with PUT**
 
 To replace an existing template, PUT to `/app/rest/webhooks/templates/id:templateId`
 
 ```
-curl -X PUT \
+curl -X PUT -k \
      -u "netwolfuk:xxxxxxxx" \
      -H "Content-Type: application/json" \
      -d @tcWebHooksTemplates/webhook-templates/stride_simple/webhook-template.json \
      http://teamcity:8111/app/rest/webhooks/templates/id:stride_simple
 ```
-The response will contain the updated template (in XML format unless you request json with `-H "Accept: application/json"`)
+The response will contain the updated template (in XML format unless you request json with `-H "Accept: application/json"`). The `-k` disables SSL validation, in case curl does not trust the CA that signed the TeamCity SSL certificate (if relevant).
 
 ### Modifying a template in TeamCity
 
@@ -125,9 +125,9 @@ INFO:   Generating readme.md file in ./tcWebHooksTemplates/bin/../webhook-templa
 The following is an example using cURL.
 
 ```
- curl -H "Accept: application/json" \
-     -u "netwolfuk:xxxxxxxx" \
-     -o webhook-template.json \
-     http://teamcity:8111/app/rest/webhooks/templates/id:stride_simple?fields=\$long,content
+ curl -k -H "Accept: application/json" \
+      -u "netwolfuk:xxxxxxxx" \
+      -o webhook-template.json \
+      http://teamcity:8111/app/rest/webhooks/templates/id:stride_simple?fields=\$long,content
 ```
-Don't forget to escape the `$` with a `\` otherwise the shell will try to interpret it.
+Don't forget to escape the `$` with a `\` otherwise the shell will try to interpret it. The `-k` disables SSL validation, in case curl does not trust the CA that signed the TeamCity SSL certificate (if relevant).

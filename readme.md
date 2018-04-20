@@ -9,6 +9,11 @@ This GitHub repository is a place to share and discover WebHook Templates. This 
 - It allows the community to iterate quickly on template development together
 - Once we have a good stable template developed, it can become a candidate for inclusion in the tcWebHooks release
 
+There are templates for:
+- [Atlassian Stride](./webhook-templates/stride-simple/)
+- [Cisco Spark, aka Webex Teams](./webhook-templates/CiscoSparkTemplates/)
+- and more... 
+
 Have a browse of the [webhook-templates](./webhook-templates/) area, and see if there are any templates you'd like to install.
 
 If there is a template missing, considering create it, and raising a pull request to add it.

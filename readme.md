@@ -1,5 +1,7 @@
 
-# tcWebHooksTemplates - A collection of WebHook Templates for the tcWebHooks TeamCity plugin
+# tcWebHooksTemplates - A collection of TeamCity WebHook Templates for the tcWebHooks plugin
+
+The [tcWebHooks plugin](https://github.com/tcplugins/tcWebHooks) is a TeamCity plugin which adds outgoing webhook support to TeamCity. One of the features of tcWebHooks is [WebHook Template](https://github.com/tcplugins/tcWebHooks/wiki/WebHook-Templates-:-An-Introduction) support.
 
 This GitHub repository is a place to share and discover WebHook Templates. This allows the following benefits:
 

@@ -23,7 +23,8 @@ The `slackMapping` value maps git usernames to slack member Ids.
 The content of the parameter should look like...
 ```
 {
-"git_user_name": "U0xxxxxx"
+    "git_user_name": "U0xxxxxx",
+    "another_user" : "U8xxxxxx"
 }
 ```
 

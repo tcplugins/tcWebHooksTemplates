@@ -25,70 +25,40 @@ For more information on editing templates in the TeamCity UI, see the [WebHook-T
 ### Importing a WebHook Template from this repository
 
 This is the process of taking a `webhook-template.json` file, and uploading it into TeamCity.
-This is achieved using the tcWebHook REST API. If the tcWebHook REST API plugin is not installed in TeamCity, you will need to do that first. See the [tcWebHook Installation instructions](https://github.com/tcplugins/tcWebHooks/wiki/Installing).
+This is achieved using the tcWebHooks plugin UI. If the tcWebHook REST API plugin is not installed in TeamCity, you will need to do that first. See the [tcWebHook Installation instructions](https://github.com/tcplugins/tcWebHooks/wiki/Installing).
 
 #### Obtaining the templates
 
-Just Git clone this repository, or download the repository and unzip it. The templates are located under the *webhook-templates* folder. 
+Select a template from the [webhook-templates](./webhook-templates/) area, click into a folder and download the `webhook-template.json` file.
 
-#### Importing a WebHook Template using the import-template.sh script
-Note: The script does not need to be run on the same computer as the TeamCity server
+#### Viewing the WebHooks Templates page in TeamCity
 
-Requirements: 
-1. A unix based computer, eg a Mac, or Linux or other Unix based OS, or a Windows computer with one of the many posix shells installed (eg, cygwin, git-bash, etc).
-2. Standard unix tools, including bash, curl, grep, tr
-3. http or https access to TeamCity
+Navigate to the WebHooks Templates area in TeamCity via one of the following means:
 
-##### Run the import script
-
-The import script takes three arguments. If they are not present on the commndline, the script will prompt for them.
-
-A template's templateId, is shown near the top of the page when viewing a template in the webUI. Go to `/webhooks/templates.html` in TeamCity and click `view` on a template to see the template details.
-  
-- `-u username:password` : This a teamcity account with admin privileges. Username and password are colon separated as per usual cURL syntax.
-- `-s teamcity-server-url` : The server address for TeamCity. Please don't include the trailing slash.
-- `-t templateId` : The templateId of the template to upload. The script will look for it in a directory (folder) of the same name under `webhook-templates`. The script also checks that the ID inside the template JSON file matches the name of the directory (folder).
+1. Go to `/webhooks/templates.html` on your TeamCity server.
+1. From the Project Config edit screen.
+   - Edit a Project Config 
+   - Select WebHooks & Templates from the list on the left
+   - Scroll to the bottom
+   - Click the link under the heading **WebHook Templates available for the *Project Name* project and sub-projects**
+1. From the TeamCity Administration page
+   - Visit TeamCity Admin page
+   - Select WebHooks from the list on the left
+   - Click the link under the heading **WebHook Templates**
 
 
-```
-./tcWebHooksTemplates/bin/import-template.sh -u netwolfuk:xxxxxxxx -s http://teamcity:8111 -t stride_simple
-INFO:   Checking template in: ./tcWebHooksTemplates/bin/../webhook-templates/stride_simple
-INFO:   Template file is present and matches stride_simple
-INFO:   URL: http://teamcity:8111/app/rest/webhooks/templates/id:stride_simple
-INFO:   Template with that ID already exists in TeamCity. Using PUT to update it.
-INFO:   Template successfully updated with ID: stride_simple
+#### Importing a WebHook Template using the UI
 
-```
+Note: You must have the tcWebHook REST API plugin installed in TeamCity. See the [tcWebHook Installation instructions](https://github.com/tcplugins/tcWebHooks/wiki/Installing).
 
-#### Importing a WebHook Template manually via the REST API
+1. Select Import Template from the Actions Menu up on the right near the top bar:
+  ![Choose Import Template from Actions menu](./docs/action_menu_import.png)
 
-**Creating a new template with POST**
-
-To create a new template, POST to `/app/rest/webhooks/templates`
-
-```
-curl -X POST -k \
-    -u "netwolfuk:xxxxxxxx" \
-    -H "Content-Type: application/json" \ 
-    -d @tcWebHooksTemplates/webhook-templates/stride_simple/webhook-template.json \
-    http://teamcity:8111/app/rest/webhooks/templates
-
-```
-The response will contain the new template (in XML format unless you request json with `-H "Accept: application/json"`) The `-k` disables SSL validation, in case curl does not trust the CA that signed the TeamCity SSL certificate (if relevant).
-
-**Updating an existing template with PUT**
-
-To replace an existing template, PUT to `/app/rest/webhooks/templates/id:templateId`
-
-```
-curl -X PUT -k \
-     -u "netwolfuk:xxxxxxxx" \
-     -H "Content-Type: application/json" \
-     -d @tcWebHooksTemplates/webhook-templates/stride_simple/webhook-template.json \
-     http://teamcity:8111/app/rest/webhooks/templates/id:stride_simple
-```
-The response will contain the updated template (in XML format unless you request json with `-H "Accept: application/json"`). The `-k` disables SSL validation, in case curl does not trust the CA that signed the TeamCity SSL certificate (if relevant).
-
+1. Choose or drag and drop the `webhook-template.json` file
+   ![Import WebHook Template dialog](./docs/choose_template_file.png)
+1. Verify the file has been loaded correctly then click import
+   ![Check template details dialog](./docs/check_template_details.png)
+1. You will be redirected to the page once the template is imported.
 ### Modifying a template in TeamCity
 
 Once a template is imported, it's possible to make changes to it from within TeamCity to further refine it. For information about editing WebHook Templates, please see the [WebHook-Templates-:-Web-UI](https://github.com/tcplugins/tcWebHooks/wiki/WebHook-Templates-%3A-Web-UI) section on the tcWebHooks wiki.
@@ -98,44 +68,15 @@ It would be great to share any templates with the wider community. See below on 
 ### Exporting a WebHook Template from TeamCity
 
 This is the process of downloading a `webhook-template.json` from TeamCity.
-This is achieved using the tcWebHook REST API. If the tcWebHook REST API plugin is not installed in TeamCity, you will need to do that first. See the [tcWebHook Installation instructions](https://github.com/tcplugins/tcWebHooks/wiki/Installing).
+
+Note: You must have the tcWebHook REST API plugin installed in TeamCity. See the [tcWebHook Installation instructions](https://github.com/tcplugins/tcWebHooks/wiki/Installing).
+
+1. Navigate to the WebHook Template you wish to export
+1. Select Export Template from the Actions Menu up on the right near the top bar:
+   ![alt](./docs/action_menu_export.png)
+1. Click the link to download and save the `webhook-template.json` file.
+   ![Export Template dialog](./docs/export_template_dialog.png)
 
 
-#### Exporting a WebHook Template using the export-template.sh script
-Note: The script does not need to be run on the same computer as the TeamCity server
-
-Requirements: 
-1. A unix based computer, eg a Mac, or Linux or other Unix based OS, or a Windows computer with one of the many posix shells installed (eg, cygwin, git-bash, etc).
-2. Standard unix tools, including bash, curl, grep, tr
-3. http or https access to TeamCity
-
-##### Run the export script
-
-The export script takes three arguments. If they are not present on the commndline, the script will prompt for them.
-
-A template's templateId, is shown near the top of the page when viewing a template in the webUI. Go to `/webhooks/templates.html` in TeamCity and click `view` on a template to see the template details.
-  
-- `-u username:password` : This a teamcity account with admin privileges. Username and password are colon separated as per usual cURL syntax.
-- `-s teamcity-server-url` : The server address for TeamCity. Please don't include the trailing slash.
-- `-t templateId` : The templateId of the template to download. The script will create a directory (folder) of the same name under `webhook-templates`. The script copies a `readme.md` into that directory in case you want to share the template.
-
-
-```
-./tcWebHooksTemplates/bin/export-template.sh -u netwolfuk:xxxxxxxx -s http://teamcity:8111 -t stride_simple
-INFO:   Template will be downloaded into: ./tcWebHooksTemplates/bin/../webhook-templates/stride_simple
-INFO:   URL: http://teamcity:8111/app/rest/webhooks/templates/id:stride_simple
-INFO:   Success: The template has been downloaded into: ./tcWebHooksTemplates/bin/../webhook-templates/stride_simple
-INFO:   Generating readme.md file in ./tcWebHooksTemplates/bin/../webhook-templates/stride_simple
-```
-
-#### Exporting a WebHook Template manually via the REST API
-
-The following is an example using cURL.
-
-```
- curl -k -H "Accept: application/json" \
-      -u "netwolfuk:xxxxxxxx" \
-      -o webhook-template.json \
-      http://teamcity:8111/app/rest/webhooks/templates/id:stride_simple?fields=\$long,content
-```
-Don't forget to escape the `$` with a `\` otherwise the shell will try to interpret it. The `-k` disables SSL validation, in case curl does not trust the CA that signed the TeamCity SSL certificate (if relevant).
+### Old instructions
+The previous instructions for importing/exporting via unix scripts are located in [docs](./docs/).
